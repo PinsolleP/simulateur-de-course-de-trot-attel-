@@ -19,25 +19,24 @@ programme l’y invitant.
     Le tableau suivant indique les évolutions de la vitesse d’un cheval, selon sa vitesse actuelle, et le jet 
 d’un dé (DQ indique que le cheval est disqualifié). 
  
-                            Jet de dé                              
-             |  [1]   [2]   [3]   [4]   [5]   [6]
-             |
-v   a  |  0  |   0    +1    +1    +1    +2    +2
-i   c  |  1  |   0    0     +1    +1    +1    +2
-t   t  |  2  |   0    0     +1    +1    +1    +2
-e   u  |  3  |  -1    0      0    +1    +1    +1       
-s   e  |  4  |  -1    0      0     0    +1    +1
-s   l  |  5  |  -2   -1      0     0     0    +1
-e   l  |  6  |  -2   -1      0     0     0    DQ
-    e
+| Victesse actuelle | 🎲 1 | 🎲 2 | 🎲 3 | 🎲 4 | 🎲 5 | 🎲 6 |
+|-------------------|:---:|:---:|:---:|:---:|:---:|:---:|
+| 0 | 0  | +1 | +1 | +1 | +2 | +2 |
+| 1 | 0  | 0  | +1 | +1 | +1 | +2 |
+| 2 | 0  | 0  | +1 | +1 | +1 | +2 |
+| 3 | -1 | 0  | 0  | +1 | +1 | +1 |
+| 4 | -1 | 0  | 0  | 0  | +1 | +1 |
+| 5 | -2 | -1 | 0  | 0  | 0  | +1 |
+| 6 | -2 | -1 | 0  | 0  | 0  | DQ |
 
  
  
     Le tableau qui suit donne pour sa part la distance dont avance un cheval lors d’un tour de jeu suivant 
 sa vitesse. 
-                           Vitesse 
-                  0    1   2   3   4   5    6
-Distance (m)      0   23  46  69  92  115  138
+
+| Distance (m) ↓ / Vitesse → | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+|----------------------------|--:|--:|--:|--:|--:|---:|---:|
+| Distance (m)               | 0 | 23 | 46 | 69 | 92 | 115 | 138 |
 
     Chaque cheval démarre la course à l’arrêt. Lors de chaque tour, chaque cheval voit sa vitesse évoluer, 
 puis parcourir la distance correspondant à sa nouvelle vitesse. Il peut être intéressant d’afficher alors 
