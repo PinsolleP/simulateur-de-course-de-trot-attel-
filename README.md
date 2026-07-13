@@ -44,3 +44,5 @@ puis parcourir la distance correspondant à sa nouvelle vitesse. Il peut être i
 le temps écoulé, la vitesse et la distance parcourue par chaque cheval. La course se déroule jusqu’à ce 
 que le dernier cheval non disqualifié ait franchit la ligne d’arrivée. On n’affichera cependant que les 3, 
 4 ou 5 premiers chevaux arrivés (suivant le type de la course). 
+
+#
