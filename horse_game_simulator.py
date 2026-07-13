@@ -4,6 +4,7 @@
 """
 simulateur_course_hippique
 """
+import random
 
 
 def correct_number_entry(message="Entrez le nombre de chevaux entre 12 et 20 :"):
@@ -48,6 +49,15 @@ def init_horses(nb_int):
         }
 
     return participant
+
+
+def dice_roll():
+    """
+        Retourne un entier aléatoire entre 1 et 6 inclus.
+        simule un lancer de dé.
+        """
+    roll = random.randint(1, 6)
+    return roll
 
 
 if __name__ == '__main__':
