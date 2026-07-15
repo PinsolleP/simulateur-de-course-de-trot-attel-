@@ -16,6 +16,8 @@ def correct_number_entry(message="Entrez le nombre de chevaux entre 12 et 20 :")
             nb_int = int(number)
             if 12 <= nb_int <= 20:
                 return nb_int
+            else:
+                print("Le nombre doit être compris entre 12 et 20.")
         else:
             print("saisie invalide.")
 
@@ -40,23 +42,16 @@ def correct_race_entry(message="Quel type de course souhaitez vous? tiercé , qu
 
 
 def init_horses(nb_int):
-    participant = {}
+    participants = {}
 
     for i in range(1, nb_int + 1):
-        numero = int(i)
-        horse_speed = 0
-        distance = 0
-        race_time = 0
-        eliminated = False
-
-        participant[numero] = {
-            "horse_speed": horse_speed,
-            "distance": distance,
-            "race_time": race_time,
-            "eliminated": eliminated
+        participants[i]= {
+            "horse_speed": 0,
+            "distance": 0,
+            "race_time": 0,
+            "eliminated": False
         }
-
-    return participant
+    return participants
 
 
 def dice_roll():
@@ -68,243 +63,275 @@ def dice_roll():
     return roll
 
 
-def roll_one(participant):
-
-    match participant["horse_speed"]:
+def roll_one(horse):
+    match horse["horse_speed"]:
         case 0:
-            participant["horse_speed"] += 0
-            participant["distance"] += 0
+            horse["horse_speed"] += 0
+            horse["distance"] += 0
 
         case 1:
-            participant["horse_speed"] += 0
-            participant["distance"] += 23
+            horse["horse_speed"] += 0
+            horse["distance"] += 23
 
         case 2:
-            participant["horse_speed"] += 0
-            participant["distance"] += 46
+            horse["horse_speed"] += 0
+            horse["distance"] += 46
 
         case 3:
-            participant["horse_speed"] -= 1
-            participant["distance"] += 46
+            horse["horse_speed"] -= 1
+            horse["distance"] += 46
 
         case 4:
-            participant["horse_speed"] -= 1
-            participant["distance"] += 69
+            horse["horse_speed"] -= 1
+            horse["distance"] += 69
 
         case 5:
-            participant["horse_speed"] -= 2
-            participant["distance"] += 69
+            horse["horse_speed"] -= 2
+            horse["distance"] += 69
 
         case 6:
-            participant["horse_speed"] -= 2
-            participant["distance"] += 92
+            horse["horse_speed"] -= 2
+            horse["distance"] += 92
 
-    participant["race_time"] += 10
-    return participant
+    horse["race_time"] += 10
+    return horse
 
 
-def roll_two(participant):
-
-    match participant["horse_speed"]:
+def roll_two(horse):
+    match horse["horse_speed"]:
         case 0:
-            participant["horse_speed"] += 1
-            participant["distance"] += 23
+            horse["horse_speed"] += 1
+            horse["distance"] += 23
 
         case 1:
-            participant["horse_speed"] += 0
-            participant["distance"] += 23
+            horse["horse_speed"] += 0
+            horse["distance"] += 23
 
         case 2:
-            participant["horse_speed"] += 0
-            participant["distance"] += 46
+            horse["horse_speed"] += 0
+            horse["distance"] += 46
 
         case 3:
-            participant["horse_speed"] += 0
-            participant["distance"] += 69
+            horse["horse_speed"] += 0
+            horse["distance"] += 69
 
         case 4:
-            participant["horse_speed"] += 0
-            participant["distance"] += 92
+            horse["horse_speed"] += 0
+            horse["distance"] += 92
 
         case 5:
-            participant["horse_speed"] -= 1
-            participant["distance"] += 92
+            horse["horse_speed"] -= 1
+            horse["distance"] += 92
 
         case 6:
-            participant["horse_speed"] -= 1
-            participant["distance"] += 115
+            horse["horse_speed"] -= 1
+            horse["distance"] += 115
 
-    participant["race_time"] += 10
-    return participant
+    horse["race_time"] += 10
+    return horse
 
 
-def roll_three(participant):
-
-    match participant["horse_speed"]:
+def roll_three(horse):
+    match horse["horse_speed"]:
         case 0:
-            participant["horse_speed"] += 1
-            participant["distance"] += 23
+            horse["horse_speed"] += 1
+            horse["distance"] += 23
 
         case 1:
-            participant["horse_speed"] += 1
-            participant["distance"] += 46
+            horse["horse_speed"] += 1
+            horse["distance"] += 46
 
         case 2:
-            participant["horse_speed"] += 1
-            participant["distance"] += 69
+            horse["horse_speed"] += 1
+            horse["distance"] += 69
 
         case 3:
-            participant["horse_speed"] += 0
-            participant["distance"] += 69
+            horse["horse_speed"] += 0
+            horse["distance"] += 69
 
         case 4:
-            participant["horse_speed"] += 0
-            participant["distance"] += 92
+            horse["horse_speed"] += 0
+            horse["distance"] += 92
 
         case 5:
-            participant["horse_speed"] += 0
-            participant["distance"] += 115
+            horse["horse_speed"] += 0
+            horse["distance"] += 115
 
         case 6:
-            participant["horse_speed"] += 0
-            participant["distance"] += 138
+            horse["horse_speed"] += 0
+            horse["distance"] += 138
 
-    participant["race_time"] += 10
-    return participant
+    horse["race_time"] += 10
+    return horse
 
 
-def roll_four(participant):
-
-    match participant["horse_speed"]:
+def roll_four(horse):
+    match horse["horse_speed"]:
         case 0:
-            participant["horse_speed"] += 1
-            participant["distance"] += 23
+            horse["horse_speed"] += 1
+            horse["distance"] += 23
 
         case 1:
-            participant["horse_speed"] += 1
-            participant["distance"] += 46
+            horse["horse_speed"] += 1
+            horse["distance"] += 46
 
         case 2:
-            participant["horse_speed"] += 1
-            participant["distance"] += 69
+            horse["horse_speed"] += 1
+            horse["distance"] += 69
 
         case 3:
-            participant["horse_speed"] += 1
-            participant["distance"] += 92
+            horse["horse_speed"] += 1
+            horse["distance"] += 92
 
         case 4:
-            participant["horse_speed"] += 0
-            participant["distance"] += 92
+            horse["horse_speed"] += 0
+            horse["distance"] += 92
 
         case 5:
-            participant["horse_speed"] += 0
-            participant["distance"] += 115
+            horse["horse_speed"] += 0
+            horse["distance"] += 115
 
         case 6:
-            participant["horse_speed"] += 0
-            participant["distance"] += 138
+            horse["horse_speed"] += 0
+            horse["distance"] += 138
 
-    participant["race_time"] += 10
-    return participant
+    horse["race_time"] += 10
+    return horse
 
 
-def roll_five(participant):
-
-    match participant["horse_speed"]:
+def roll_five(horse):
+    match horse["horse_speed"]:
         case 0:
-            participant["horse_speed"] += 2
-            participant["distance"] += 46
+            horse["horse_speed"] += 2
+            horse["distance"] += 46
 
         case 1:
-            participant["horse_speed"] += 1
-            participant["distance"] += 46
+            horse["horse_speed"] += 1
+            horse["distance"] += 46
 
         case 2:
-            participant["horse_speed"] += 1
-            participant["distance"] += 69
+            horse["horse_speed"] += 1
+            horse["distance"] += 69
 
         case 3:
-            participant["horse_speed"] += 1
-            participant["distance"] += 92
+            horse["horse_speed"] += 1
+            horse["distance"] += 92
 
         case 4:
-            participant["horse_speed"] += 1
-            participant["distance"] += 115
+            horse["horse_speed"] += 1
+            horse["distance"] += 115
 
         case 5:
-            participant["horse_speed"] += 0
-            participant["distance"] += 115
+            horse["horse_speed"] += 0
+            horse["distance"] += 115
 
         case 6:
-            participant["horse_speed"] += 0
-            participant["distance"] += 138
+            horse["horse_speed"] += 0
+            horse["distance"] += 138
 
-    participant["race_time"] += 10
-    return participant
+    horse["race_time"] += 10
+    return horse
 
 
-def roll_six(participant):
-
-    match participant["horse_speed"]:
+def roll_six(horse):
+    match horse["horse_speed"]:
         case 0:
-            participant["horse_speed"] += 2
-            participant["distance"] += 46
+            horse["horse_speed"] += 2
+            horse["distance"] += 46
 
         case 1:
-            participant["horse_speed"] += 2
-            participant["distance"] += 69
+            horse["horse_speed"] += 2
+            horse["distance"] += 69
 
         case 2:
-            participant["horse_speed"] += 2
-            participant["distance"] += 92
+            horse["horse_speed"] += 2
+            horse["distance"] += 92
 
         case 3:
-            participant["horse_speed"] += 1
-            participant["distance"] += 92
+            horse["horse_speed"] += 1
+            horse["distance"] += 92
 
         case 4:
-            participant["horse_speed"] += 1
-            participant["distance"] += 115
+            horse["horse_speed"] += 1
+            horse["distance"] += 115
 
         case 5:
-            participant["horse_speed"] += 1
-            participant["distance"] += 138
+            horse["horse_speed"] += 1
+            horse["distance"] += 138
 
         case 6:
-            participant["eliminated"] = True
-            return participant
+            horse["eliminated"] = True
+            return horse
 
-    participant["race_time"] += 10
-    return participant
+    horse["race_time"] += 10
+    return horse
 
 
-def update_participant(participant, roll):
+def update_participant(horse, roll):
+    """
+       Met à jour un participant en fonction du résultat du dé.
+
+       Args:
+           horse (dict) : Dictionnaire contenant les infos du joueur.
+           roll (int) : Résultat du lancer de dé (1 à 6).
+
+       Returns:
+           dict: Participant mis à jour.
+       """
 
     if roll == 1:
-        roll_one(participant)
+        roll_one(horse)
     elif roll == 2:
-        roll_two(participant)
+        roll_two(horse)
     elif roll == 3:
-        roll_three(participant)
+        roll_three(horse)
     elif roll == 4:
-        roll_four(participant)
+        roll_four(horse)
     elif roll == 5:
-        roll_five(participant)
+        roll_five(horse)
     else:
-        roll_six(participant)
-        
-    return participant
+        roll_six(horse)
+
+    return horse
 
 
-def game_mechanic(participant,):
-
-    nb_horse = correct_number_entry()
-    correct_race_entry()
-    print(init_horses(nb_horse))
+def game_mechanic(participants, nb_winner):
     arrival_distance = 2400
+    winners = []
+    turn = 1
 
+    while len(winners) < nb_winner :
+        print(f"Tour {turn}")
 
+        for numero, horse in participants.items():
+            if horse["eliminated"]:
+                continue
+
+            roll = dice_roll()
+            update_participant(horse, roll)
+
+            if horse["distance"] >= arrival_distance and numero not in winners:
+                winners.append(numero)
+
+        print("classement provisoire :")
+        for numero, horse in participants.items():
+            print(
+                f"Horse {numero} :"
+                f"{horse['distance']} m "
+                f"speed={horse['horse_speed']} "
+                f"time={horse['race_time']} "
+                f"eliminated={horse['eliminated']}"
+            )
+
+        turn += 1
+
+    print("Course terminée")
+    print(' '.join(map(str, winners)), end='')
+    return winners
 
 
 if __name__ == '__main__':
-    game_mechanic()
+    nb_horse = correct_number_entry()
+    nb_winner = correct_race_entry()
+    participants = init_horses(nb_horse)
+    game_mechanic(participants, nb_winner)
