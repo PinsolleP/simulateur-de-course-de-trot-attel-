@@ -33,7 +33,7 @@ def correct_race_entry(message="Quel type de course souhaitez vous? tiercé , qu
                 nb_winner = 4
             else:
                 nb_winner = 5
-                
+
             return nb_winner
         else:
             print("Choix invalide.")
@@ -278,17 +278,33 @@ def roll_six(participant):
     return participant
 
 
-def game_mechanic(participant):
+def update_participant(participant, roll):
+
+    if roll == 1:
+        roll_one(participant)
+    elif roll == 2:
+        roll_two(participant)
+    elif roll == 3:
+        roll_three(participant)
+    elif roll == 4:
+        roll_four(participant)
+    elif roll == 5:
+        roll_five(participant)
+    else:
+        roll_six(participant)
+        
+    return participant
+
+
+def game_mechanic(participant,):
 
     nb_horse = correct_number_entry()
-    race = correct_race_entry()
+    correct_race_entry()
     print(init_horses(nb_horse))
     arrival_distance = 2400
-    nb_winner
+
 
 
 
 if __name__ == '__main__':
-    nb_horse = correct_number_entry()
-    race = correct_race_entry()
-    print(init_horses(nb_horse))
+    game_mechanic()
