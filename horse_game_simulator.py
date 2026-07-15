@@ -27,8 +27,14 @@ def correct_race_entry(message="Quel type de course souhaitez vous? tiercé , qu
     while True:
         race_name = input(message).strip().lower()  # lower() = toutes les lettres en minuscule
         if race_name in valid_name:
-            race = race_name
-            return race
+            if race_name == "tiercé":
+                nb_winner = 3
+            elif race_name == "quarté":
+                nb_winner = 4
+            else:
+                nb_winner = 5
+                
+            return nb_winner
         else:
             print("Choix invalide.")
 
@@ -270,6 +276,16 @@ def roll_six(participant):
 
     participant["race_time"] += 10
     return participant
+
+
+def game_mechanic(participant):
+
+    nb_horse = correct_number_entry()
+    race = correct_race_entry()
+    print(init_horses(nb_horse))
+    arrival_distance = 2400
+    nb_winner
+
 
 
 if __name__ == '__main__':
