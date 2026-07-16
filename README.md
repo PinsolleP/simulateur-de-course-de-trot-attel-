@@ -34,7 +34,7 @@ d’un dé (DQ indique que le cheval est disqualifié).
     Le tableau qui suit donne pour sa part la distance dont avance un cheval lors d’un tour de jeu suivant 
 sa vitesse. 
 
-| Distance (m) ↓ / Vitesse → | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+|                 /Vitesse → | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
 |----------------------------|--:|--:|--:|--:|--:|---:|---:|
 | Distance (m)               | 0 | 23 | 46 | 69 | 92 | 115 | 138 |
 
