@@ -1,4 +1,17 @@
-# Simulateur de course de trot attelé
+# Ce projet est un simulateur de course de chevaux développé en Python.
+
+# Objectifs
+
+Ce projet a été réalisé afin de mettre en pratique les notions suivantes :
+
+- les fonctions Python ;
+- les boucles (`while`, `for`) ;
+- les conditions (`if`, `match/case`) ;
+- les dictionnaires ;
+- la manipulation des listes ;
+- le tri de données avec `sorted()` ;
+- la gestion des entrées utilisateur ;
+- la génération aléatoire avec le module `random
 
 # Règlr du jeu :
 
@@ -44,4 +57,34 @@ le temps écoulé, la vitesse et la distance parcourue par chaque cheval. La cou
 que le dernier cheval non disqualifié ait franchit la ligne d’arrivée. On n’affichera cependant que les 3, 
 4 ou 5 premiers chevaux arrivés (suivant le type de la course). 
 
-#
+# Fonctionnalités
+
+Le simulateur permet :
+
+- de choisir le nombre de chevaux (12 à 20)  
+- de choisir le type de course :
+    - tiercé (3 arrivées)
+    - quarté (4 arrivées)
+    - quinté (5 arrivées)
+
+- de simuler les déplacements des chevaux  
+- de gérer l'évolution de la vitesse  
+- d'éliminer certains chevaux pendant la course  
+- d'afficher un classement provisoire  
+- d'afficher le classement final
+
+# Technologies utilisées
+
+- Python 3.14
+- Module standard `random`
+- Git / GitHub
+
+# Améliorations possibles
+
+Quelques évolutions possibles :
+
+- ajouter une interface graphique ;
+- ajouter des chevaux avec des caractéristiques différentes ;
+- ajouter une sauvegarde des résultats ;
+- gérer une vraie photo-finish en cas d'égalité ;
+- ajouter plusieurs courses avec un classement général.
