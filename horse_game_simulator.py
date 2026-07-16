@@ -2,13 +2,38 @@
 # -*- coding: utf-8 -*-
 
 """
-simulateur_course_hippique
+Simulateur de course hippique.
+
+Ce programme simule une course de chevaux basée sur des lancers de dés.
+Le joueur choisit – le nombre de chevaux participants (12 à 20). Le type de course (tiercé, quarté ou quinté).
+
+Chaque cheval possède – une vitesse
+– une distance parcourue
+– un temps de course
+– un statut d'élimination
+- un temps d'arrivée.
+
+Le programme gère – le déplacement des chevaux selon le résultat du dé
+– les éliminations
+- le classement provisoire
+– le classement final des chevaux arrivés.
 """
+
 import random
 
 
 def correct_number_entry(message="Entrez le nombre de chevaux entre 12 et 20 :"):
-    """Fonction qui vérifie la bonne saisie utilisateur d'un entier positif entre 12 et 20."""
+    """
+    Demande à l'utilisateur le nombre de chevaux participant à la course.
+
+    Vérifie que la saisie est un entier compris entre 12 et 20.
+
+    Args:
+        message (str) : Message affiché à l'utilisateur.
+
+    Returns:
+        nb_int: Nombre de chevaux validé.
+    """
 
     while True:
         number = input(message).strip()  # ignore les espaces avant et après la saisie
@@ -23,7 +48,19 @@ def correct_number_entry(message="Entrez le nombre de chevaux entre 12 et 20 :")
 
 
 def correct_race_entry(message="Quel type de course souhaitez vous? tiercé , quarté , quinté :"):
-    """Fonction qui vérifie la bonne saisie utilisateur du type de course souhaité."""
+    """
+    Demande le type de course choisi par le joueur.
+
+    Les choix possibles sont tiercé : 3 chevaux gagnants
+    – quarté : 4 chevaux gagnants
+    – quinté : 5 chevaux gagnants.
+
+    Args:
+        message (str) : Message affiché à l'utilisateur.
+
+    Returns:
+        nb_winners : Nombre de chevaux gagnants attendus.
+    """
 
     valid_name = ["tiercé", "quarté", "quinté"]
     while True:
@@ -42,6 +79,21 @@ def correct_race_entry(message="Quel type de course souhaitez vous? tiercé , qu
 
 
 def init_horses(nb_int):
+    """
+        Initialise les chevaux participant à la course.
+
+        Chaque cheval reçoit un dictionnaire contenant – sa vitesse initiale
+        – sa distance parcourue
+        – son temps de course
+        – son temps d'arrivée
+        – son statut d'élimination
+
+        Args:
+            nb_int (int) : Nombre de chevaux participants.
+
+        Returns:
+            participants : Dictionnaire contenant tous les chevaux.
+        """
     participants = {}
 
     for i in range(1, nb_int + 1):
@@ -65,6 +117,18 @@ def dice_roll():
 
 
 def roll_one(horse):
+    """
+    Met à jour la position d'un cheval selon le résultat du dé.
+
+    La vitesse du cheval peut évoluer et la distance parcourue
+    est augmentée selon sa vitesse actuelle.
+
+    Args:
+        horse (dict) : Informations du cheval.
+
+    Returns:
+        horse: Cheval mis à jour.
+    """
     match horse["horse_speed"]:
         case 0:
             horse["horse_speed"] += 0
@@ -99,6 +163,18 @@ def roll_one(horse):
 
 
 def roll_two(horse):
+    """
+        Met à jour la position d'un cheval selon le résultat du dé.
+
+        La vitesse du cheval peut évoluer et la distance parcourue
+        est augmentée selon sa vitesse actuelle.
+
+        Args:
+            horse (dict) : Informations du cheval.
+
+        Returns:
+            horse: Cheval mis à jour.
+        """
     match horse["horse_speed"]:
         case 0:
             horse["horse_speed"] += 1
@@ -133,6 +209,18 @@ def roll_two(horse):
 
 
 def roll_three(horse):
+    """
+        Met à jour la position d'un cheval selon le résultat du dé.
+
+        La vitesse du cheval peut évoluer et la distance parcourue
+        est augmentée selon sa vitesse actuelle.
+
+        Args:
+            horse (dict) : Informations du cheval.
+
+        Returns:
+            horse: Cheval mis à jour.
+        """
     match horse["horse_speed"]:
         case 0:
             horse["horse_speed"] += 1
@@ -167,6 +255,18 @@ def roll_three(horse):
 
 
 def roll_four(horse):
+    """
+        Met à jour la position d'un cheval selon le résultat du dé.
+
+        La vitesse du cheval peut évoluer et la distance parcourue
+        est augmentée selon sa vitesse actuelle.
+
+        Args:
+            horse (dict) : Informations du cheval.
+
+        Returns:
+            horse: Cheval mis à jour.
+        """
     match horse["horse_speed"]:
         case 0:
             horse["horse_speed"] += 1
@@ -201,6 +301,18 @@ def roll_four(horse):
 
 
 def roll_five(horse):
+    """
+        Met à jour la position d'un cheval selon le résultat du dé.
+
+        La vitesse du cheval peut évoluer et la distance parcourue
+        est augmentée selon sa vitesse actuelle.
+
+        Args:
+            horse (dict) : Informations du cheval.
+
+        Returns:
+            horse: Cheval mis à jour.
+        """
     match horse["horse_speed"]:
         case 0:
             horse["horse_speed"] += 2
@@ -235,6 +347,18 @@ def roll_five(horse):
 
 
 def roll_six(horse):
+    """
+        Met à jour la position d'un cheval selon le résultat du dé.
+
+        La vitesse du cheval peut évoluer et la distance parcourue
+        est augmentée selon sa vitesse actuelle.
+
+        Args:
+            horse (dict) : Informations du cheval.
+
+        Returns:
+            horse: Cheval mis à jour.
+        """
     match horse["horse_speed"]:
         case 0:
             horse["horse_speed"] += 2
@@ -273,11 +397,11 @@ def update_participant(horse, roll):
        Met à jour un participant en fonction du résultat du dé.
 
        Args:
-           horse (dict) : Dictionnaire contenant les infos du joueur.
-           roll (int) : Résultat du lancer de dé (1 à 6).
+           horse (dict) : Dictionnaire contenant les infos du cheval.
+           Roll (int) : Résultat du lancer de dé (1 à 6).
 
        Returns:
-           dict: Participant mis à jour.
+           horse: Cheval mis à jour.
        """
 
     if roll == 1:
@@ -297,6 +421,30 @@ def update_participant(horse, roll):
 
 
 def game_mechanic(participants, nb_winner):
+    """
+        Gère le déroulement complet de la course hippique.
+
+        À chaque tour – chaque cheval encore en course lance un dé
+        – sa vitesse et sa distance sont mises à jour
+        – les chevaux éliminés sont retirés de la course
+        – le classement provisoire est affiché
+        – les chevaux ayant atteint la distance d'arrivée sont ajoutés aux gagnants.
+
+        La course continue jusqu'à obtenir le nombre de gagnants
+        correspondant au type de course choisi.
+
+          Args:
+            participants (dict) : Dictionnaire contenant les chevaux participants
+                avec leurs caractéristiques (vitesse, distance, temps de course,
+                élimination et temps d'arrivée).
+
+            nb_winner (int) : Nombre de chevaux devant terminer la course
+                pour valider l'arrivée.
+
+        Returns:
+            winners : Liste contenant les numéros des chevaux gagnants dans
+            l'ordre d'arrivée.
+        """
     arrival_distance = 2400
     winners = []
     turn = 1
@@ -318,10 +466,15 @@ def game_mechanic(participants, nb_winner):
                 winners.append(numero)
                 horse["arrival_time"] = horse["race_time"]
 
+        # Suppression des chevaux éliminés après le tour complet.
+        # La suppression est faite après la boucle pour éviter
+        # de modifier un dictionnaire pendant son parcours.
         for numero in eliminated_horse:
             print(f"Le cheval {numero} est disqualifié")
             del participants[numero]
 
+        # Trie les chevaux selon la distance parcourue,
+        # du plus avancé au moins avancé.
         classement = sorted(
             participants.items(),
             key=lambda item: item[1]["distance"],
