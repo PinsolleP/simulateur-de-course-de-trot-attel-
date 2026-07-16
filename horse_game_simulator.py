@@ -45,7 +45,7 @@ def init_horses(nb_int):
     participants = {}
 
     for i in range(1, nb_int + 1):
-        participants[i]= {
+        participants[i] = {
             "horse_speed": 0,
             "distance": 0,
             "race_time": 0,
@@ -300,27 +300,38 @@ def game_mechanic(participants, nb_winner):
     winners = []
     turn = 1
 
-    while len(winners) < nb_winner :
+    while len(winners) < nb_winner:
+        eliminated_horse = []
         print(f"Tour {turn}")
 
         for numero, horse in participants.items():
-            if horse["eliminated"]:
-                continue
 
             roll = dice_roll()
             update_participant(horse, roll)
 
+            if horse["eliminated"]:
+                eliminated_horse.append(numero)
+                continue
+
             if horse["distance"] >= arrival_distance and numero not in winners:
                 winners.append(numero)
 
-        print("classement provisoire :")
-        for numero, horse in participants.items():
+        for numero in eliminated_horse:
+            print(f"Le cheval {numero} est disqualifié")
+            del participants[numero]
+
+        classement = sorted(
+            participants.items(),
+            key=lambda item: item[1]["distance"],
+            reverse=True
+        )
+
+        print("Classement provisoire :")
+
+        for numero, horse in classement[:nb_winner]:
             print(
-                f"Horse {numero} :"
-                f"{horse['distance']} m "
-                f"speed={horse['horse_speed']} "
-                f"time={horse['race_time']} "
-                f"eliminated={horse['eliminated']}"
+                f"Cheval {numero}: "
+                f"{horse['distance']} m"
             )
 
         turn += 1
