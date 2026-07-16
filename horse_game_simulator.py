@@ -49,6 +49,7 @@ def init_horses(nb_int):
             "horse_speed": 0,
             "distance": 0,
             "race_time": 0,
+            "arrival_time": 0,
             "eliminated": False
         }
     return participants
@@ -315,6 +316,7 @@ def game_mechanic(participants, nb_winner):
 
             if horse["distance"] >= arrival_distance and numero not in winners:
                 winners.append(numero)
+                horse["arrival_time"] = horse["race_time"]
 
         for numero in eliminated_horse:
             print(f"Le cheval {numero} est disqualifié")
@@ -336,9 +338,20 @@ def game_mechanic(participants, nb_winner):
 
         turn += 1
 
+    classement_final = sorted(
+        winners,
+        key=lambda numero: participants[numero]["arrival_time"]
+    )
+
     print("Course terminée")
-    print(' '.join(map(str, winners)), end='')
-    return winners
+    print("Classement final :")
+
+    for place, numero in enumerate(classement_final, start=1):
+        horse = participants[numero]
+        print(
+            f"{place}. Cheval {numero} - "
+            f"{horse['arrival_time']} secondes"
+        )
 
 
 if __name__ == '__main__':
