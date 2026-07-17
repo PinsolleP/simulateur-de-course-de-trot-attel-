@@ -116,7 +116,7 @@ def dice_roll():
     return roll
 
 
-def roll_one(horse):
+def update_horse(horse, roll):
     """
     Met à jour la position d'un cheval selon le résultat du dé.
 
@@ -125,297 +125,34 @@ def roll_one(horse):
 
     Args:
         horse (dict) : Informations du cheval.
+        Roll (int) : le lancer de dé
 
     Returns:
         horse: Cheval mis à jour.
     """
-    match horse["horse_speed"]:
-        case 0:
-            horse["horse_speed"] += 0
-            horse["distance"] += 0
+    speed_changes = {
+        0: {1: 0, 2: +1, 3: +1, 4: +1, 5: +2, 6: +2},
+        1: {1: 0, 2: 0, 3: +1, 4: +1, 5: +1, 6: +2},
+        2: {1: 0, 2: 0, 3: +1, 4: +1, 5: +1, 6: +2},
+        3: {1: -1, 2: 0, 3: 0, 4: +1, 5: +1, 6: +1},
+        4: {1: -1, 2: 0, 3: 0, 4: 0, 5: +1, 6: +1},
+        5: {1: -2, 2: -1, 3: 0, 4: 0, 5: 0, 6: +1},
+        6: {1: -2, 2: -1, 3: 0, 4: 0, 5: 0, 6: "DQ"},
+    }
+    # Vérification si DQ
+    delta = speed_changes.get(horse["horse_speed"], {}).get(roll)
+    if delta == "DQ":
+        horse["eliminated"] = True
+        return horse
 
-        case 1:
-            horse["horse_speed"] += 0
-            horse["distance"] += 23
+    # Mise à jour de la vitesse
+    horse["horse_speed"] = max(0, horse["horse_speed"] + delta)
 
-        case 2:
-            horse["horse_speed"] += 0
-            horse["distance"] += 46
+    # Distance parcourue = vitesse * 23 m
+    horse["distance"] += horse["horse_speed"] * 23
 
-        case 3:
-            horse["horse_speed"] -= 1
-            horse["distance"] += 46
-
-        case 4:
-            horse["horse_speed"] -= 1
-            horse["distance"] += 69
-
-        case 5:
-            horse["horse_speed"] -= 2
-            horse["distance"] += 69
-
-        case 6:
-            horse["horse_speed"] -= 2
-            horse["distance"] += 92
-
+    # Temps de course
     horse["race_time"] += 10
-    return horse
-
-
-def roll_two(horse):
-    """
-        Met à jour la position d'un cheval selon le résultat du dé.
-
-        La vitesse du cheval peut évoluer et la distance parcourue
-        est augmentée selon sa vitesse actuelle.
-
-        Args:
-            horse (dict) : Informations du cheval.
-
-        Returns:
-            horse: Cheval mis à jour.
-        """
-    match horse["horse_speed"]:
-        case 0:
-            horse["horse_speed"] += 1
-            horse["distance"] += 23
-
-        case 1:
-            horse["horse_speed"] += 0
-            horse["distance"] += 23
-
-        case 2:
-            horse["horse_speed"] += 0
-            horse["distance"] += 46
-
-        case 3:
-            horse["horse_speed"] += 0
-            horse["distance"] += 69
-
-        case 4:
-            horse["horse_speed"] += 0
-            horse["distance"] += 92
-
-        case 5:
-            horse["horse_speed"] -= 1
-            horse["distance"] += 92
-
-        case 6:
-            horse["horse_speed"] -= 1
-            horse["distance"] += 115
-
-    horse["race_time"] += 10
-    return horse
-
-
-def roll_three(horse):
-    """
-        Met à jour la position d'un cheval selon le résultat du dé.
-
-        La vitesse du cheval peut évoluer et la distance parcourue
-        est augmentée selon sa vitesse actuelle.
-
-        Args:
-            horse (dict) : Informations du cheval.
-
-        Returns:
-            horse: Cheval mis à jour.
-        """
-    match horse["horse_speed"]:
-        case 0:
-            horse["horse_speed"] += 1
-            horse["distance"] += 23
-
-        case 1:
-            horse["horse_speed"] += 1
-            horse["distance"] += 46
-
-        case 2:
-            horse["horse_speed"] += 1
-            horse["distance"] += 69
-
-        case 3:
-            horse["horse_speed"] += 0
-            horse["distance"] += 69
-
-        case 4:
-            horse["horse_speed"] += 0
-            horse["distance"] += 92
-
-        case 5:
-            horse["horse_speed"] += 0
-            horse["distance"] += 115
-
-        case 6:
-            horse["horse_speed"] += 0
-            horse["distance"] += 138
-
-    horse["race_time"] += 10
-    return horse
-
-
-def roll_four(horse):
-    """
-        Met à jour la position d'un cheval selon le résultat du dé.
-
-        La vitesse du cheval peut évoluer et la distance parcourue
-        est augmentée selon sa vitesse actuelle.
-
-        Args:
-            horse (dict) : Informations du cheval.
-
-        Returns:
-            horse: Cheval mis à jour.
-        """
-    match horse["horse_speed"]:
-        case 0:
-            horse["horse_speed"] += 1
-            horse["distance"] += 23
-
-        case 1:
-            horse["horse_speed"] += 1
-            horse["distance"] += 46
-
-        case 2:
-            horse["horse_speed"] += 1
-            horse["distance"] += 69
-
-        case 3:
-            horse["horse_speed"] += 1
-            horse["distance"] += 92
-
-        case 4:
-            horse["horse_speed"] += 0
-            horse["distance"] += 92
-
-        case 5:
-            horse["horse_speed"] += 0
-            horse["distance"] += 115
-
-        case 6:
-            horse["horse_speed"] += 0
-            horse["distance"] += 138
-
-    horse["race_time"] += 10
-    return horse
-
-
-def roll_five(horse):
-    """
-        Met à jour la position d'un cheval selon le résultat du dé.
-
-        La vitesse du cheval peut évoluer et la distance parcourue
-        est augmentée selon sa vitesse actuelle.
-
-        Args:
-            horse (dict) : Informations du cheval.
-
-        Returns:
-            horse: Cheval mis à jour.
-        """
-    match horse["horse_speed"]:
-        case 0:
-            horse["horse_speed"] += 2
-            horse["distance"] += 46
-
-        case 1:
-            horse["horse_speed"] += 1
-            horse["distance"] += 46
-
-        case 2:
-            horse["horse_speed"] += 1
-            horse["distance"] += 69
-
-        case 3:
-            horse["horse_speed"] += 1
-            horse["distance"] += 92
-
-        case 4:
-            horse["horse_speed"] += 1
-            horse["distance"] += 115
-
-        case 5:
-            horse["horse_speed"] += 0
-            horse["distance"] += 115
-
-        case 6:
-            horse["horse_speed"] += 0
-            horse["distance"] += 138
-
-    horse["race_time"] += 10
-    return horse
-
-
-def roll_six(horse):
-    """
-        Met à jour la position d'un cheval selon le résultat du dé.
-
-        La vitesse du cheval peut évoluer et la distance parcourue
-        est augmentée selon sa vitesse actuelle.
-
-        Args:
-            horse (dict) : Informations du cheval.
-
-        Returns:
-            horse: Cheval mis à jour.
-        """
-    match horse["horse_speed"]:
-        case 0:
-            horse["horse_speed"] += 2
-            horse["distance"] += 46
-
-        case 1:
-            horse["horse_speed"] += 2
-            horse["distance"] += 69
-
-        case 2:
-            horse["horse_speed"] += 2
-            horse["distance"] += 92
-
-        case 3:
-            horse["horse_speed"] += 1
-            horse["distance"] += 92
-
-        case 4:
-            horse["horse_speed"] += 1
-            horse["distance"] += 115
-
-        case 5:
-            horse["horse_speed"] += 1
-            horse["distance"] += 138
-
-        case 6:
-            horse["eliminated"] = True
-            return horse
-
-    horse["race_time"] += 10
-    return horse
-
-
-def update_participant(horse, roll):
-    """
-       Met à jour un participant en fonction du résultat du dé.
-
-       Args:
-           horse (dict) : Dictionnaire contenant les infos du cheval.
-           Roll (int) : Résultat du lancer de dé (1 à 6).
-
-       Returns:
-           horse: Cheval mis à jour.
-       """
-
-    if roll == 1:
-        roll_one(horse)
-    elif roll == 2:
-        roll_two(horse)
-    elif roll == 3:
-        roll_three(horse)
-    elif roll == 4:
-        roll_four(horse)
-    elif roll == 5:
-        roll_five(horse)
-    else:
-        roll_six(horse)
 
     return horse
 
@@ -456,7 +193,7 @@ def game_mechanic(participants, nb_winner):
         for numero, horse in participants.items():
 
             roll = dice_roll()
-            update_participant(horse, roll)
+            update_horse(horse, roll)
 
             if horse["eliminated"]:
                 eliminated_horse.append(numero)
